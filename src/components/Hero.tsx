@@ -1,7 +1,11 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Sparkles, Wand2, Zap } from "lucide-react";
+import BuilderModal from "./BuilderModal";
 
 const Hero = () => {
+  const [isBuilderOpen, setIsBuilderOpen] = useState(false);
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden hero-gradient">
       {/* Background Elements */}
@@ -33,7 +37,11 @@ const Hero = () => {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12 animate-fade-in-up delay-300">
-            <Button size="lg" className="btn-primary text-lg px-8 py-4 h-auto">
+            <Button 
+              size="lg" 
+              className="btn-primary text-lg px-8 py-4 h-auto"
+              onClick={() => setIsBuilderOpen(true)}
+            >
               <Wand2 className="w-5 h-5 mr-2" />
               Start Building Now
             </Button>
@@ -71,6 +79,9 @@ const Hero = () => {
           <div className="w-1 h-3 bg-primary rounded-full mt-2 animate-pulse"></div>
         </div>
       </div>
+
+      {/* Builder Modal */}
+      <BuilderModal open={isBuilderOpen} onOpenChange={setIsBuilderOpen} />
     </section>
   );
 };

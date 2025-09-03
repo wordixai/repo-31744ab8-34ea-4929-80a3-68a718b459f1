@@ -1,8 +1,12 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight, Sparkles } from "lucide-react";
+import BuilderModal from "./BuilderModal";
 
 const CTA = () => {
+  const [isBuilderOpen, setIsBuilderOpen] = useState(false);
+
   return (
     <section className="py-24 bg-background">
       <div className="container mx-auto px-6">
@@ -28,7 +32,11 @@ const CTA = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up delay-300">
-              <Button size="lg" className="btn-primary text-lg px-8 py-4 h-auto">
+              <Button 
+                size="lg" 
+                className="btn-primary text-lg px-8 py-4 h-auto"
+                onClick={() => setIsBuilderOpen(true)}
+              >
                 Start Building for Free
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
@@ -43,6 +51,9 @@ const CTA = () => {
           </CardContent>
         </Card>
       </div>
+
+      {/* Builder Modal */}
+      <BuilderModal open={isBuilderOpen} onOpenChange={setIsBuilderOpen} />
     </section>
   );
 };

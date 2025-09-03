@@ -1,10 +1,12 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu, Sparkles } from "lucide-react";
-import { useState } from "react";
+import BuilderModal from "./BuilderModal";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isBuilderOpen, setIsBuilderOpen] = useState(false);
 
   const navItems = [
     { name: "Features", href: "#features" },
@@ -41,7 +43,12 @@ const Navigation = () => {
           {/* CTA Buttons */}
           <div className="hidden md:flex items-center gap-4">
             <Button variant="ghost">Sign In</Button>
-            <Button className="btn-primary">Get Started</Button>
+            <Button 
+              className="btn-primary"
+              onClick={() => setIsBuilderOpen(true)}
+            >
+              Get Started
+            </Button>
           </div>
 
           {/* Mobile Menu */}
@@ -65,13 +72,24 @@ const Navigation = () => {
                 ))}
                 <div className="flex flex-col gap-3 mt-6">
                   <Button variant="outline" className="w-full">Sign In</Button>
-                  <Button className="btn-primary w-full">Get Started</Button>
+                  <Button 
+                    className="btn-primary w-full"
+                    onClick={() => {
+                      setIsOpen(false);
+                      setIsBuilderOpen(true);
+                    }}
+                  >
+                    Get Started
+                  </Button>
                 </div>
               </div>
             </SheetContent>
           </Sheet>
         </div>
       </div>
+
+      {/* Builder Modal */}
+      <BuilderModal open={isBuilderOpen} onOpenChange={setIsBuilderOpen} />
     </nav>
   );
 };
